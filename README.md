@@ -19,7 +19,12 @@ A simple command-line todo application written in Go that helps you manage your 
    git clone https://github.com/msaberp/cli-todo-app-go.git
    cd cli-todo-app-go
    ```
-3. Build the application:
+3. Initialize the Go module:
+   ```bash
+   go mod init github.com/msaberp/cli-todo-app-go
+   go mod tidy
+   ```
+4. Build the application:
    ```bash
    go build
    ```
