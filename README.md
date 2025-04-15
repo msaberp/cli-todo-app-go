@@ -4,8 +4,9 @@ A simple command-line todo application written in Go that helps you manage your 
 
 ## Features
 
-- Add new tasks
-- List all tasks
+- Add new tasks with due dates and priorities
+- List all tasks in a nicely formatted table
+- Sort tasks by ID, due date, or priority
 - Mark tasks as completed
 - Delete tasks
 - Persistent storage using JSON file
@@ -35,12 +36,22 @@ The application provides the following commands:
 
 - Add a new task:
   ```bash
-  ./cli-todo-app-go -add "Your task description"
+  ./cli-todo-app-go -add "Your task description" -due "2024-04-20" -priority "High"
   ```
 
 - List all tasks:
   ```bash
   ./cli-todo-app-go -list
+  ```
+
+- List tasks sorted by due date:
+  ```bash
+  ./cli-todo-app-go -list -sort due
+  ```
+
+- List tasks sorted by priority:
+  ```bash
+  ./cli-todo-app-go -list -sort priority
   ```
 
 - Mark a task as completed (using task ID):
@@ -52,6 +63,25 @@ The application provides the following commands:
   ```bash
   ./cli-todo-app-go -del <task-id>
   ```
+
+## Task Display Format
+
+Tasks are displayed in a tabular format with the following columns:
+- ID: Task identifier
+- ✓: Completion status (✓ for completed, blank for pending)
+- Priority: Task priority (High, Medium, Low)
+- Due Date: Task due date in YYYY-MM-DD format
+- Title: Task description
+- Status: Task status (Completed or Pending)
+
+Example output:
+```
+ID  ✓ Priority Due Date     Title                                              Status    
+----------------------------------------------------------------------------------------
+1   ✓ High     2024-04-20   Complete project documentation                     Completed
+2     Medium   2024-04-25   Review pull requests                               Pending   
+3     Low      No date      Update README                                      Pending   
+```
 
 ## Data Storage
 
