@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"slices"
 )
 
 func main() {
@@ -50,9 +51,15 @@ func main() {
 		for i := range tasks {
 			if tasks[i].ID == *del {
 				fmt.Println("Deleted:", tasks[i].Title)
-				tasks = append(tasks[:i], tasks[i+1:]...)
+				tasks = slices.Delete(tasks, i, i+1)
 				break
 			}
+		}
+
+		// reindexing the tasks
+		for i, t := range tasks {
+			t.ID = i + 1
+			tasks[i] = t
 		}
 
 	default:
