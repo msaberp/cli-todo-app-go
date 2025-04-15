@@ -2,9 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"errors"
-	"fmt"
-	"io/ioutil"
 	"os"
 )
 
@@ -18,7 +15,7 @@ const fileName = "tasks.json"
 
 func loadTasks() ([]Task, error) {
 	var tasks []Task
-	file, err := ioutil.ReadFile(fileName)
+	file, err := os.ReadFile(fileName)
 	if err != nil {
 		if os.IsNotExist(err) {
 			return tasks, nil // no file yet
@@ -40,36 +37,5 @@ func saveTasks(tasks []Task) error {
 	if err != nil {
 		return err
 	}
-	return ioutil.WriteFile(fileName, data, 0644)
-}
-
-// Function with no return values
-func printTask(task Task) {
-	fmt.Printf("Task: %s (ID: %d)\n", task.Title, task.ID)
-}
-
-// Function with one return value
-func isTaskCompleted(task Task) bool {
-	return task.Completed
-}
-
-// Function with multiple return values
-func findTaskByID(tasks []Task, id int) (Task, error) {
-	for _, task := range tasks {
-		if task.ID == id {
-			return task, nil // nil means no error
-		}
-	}
-	return Task{}, errors.New("task not found")
-}
-
-// Function with named return values
-func getTaskStats(tasks []Task) (total int, completed int) {
-	for _, task := range tasks {
-		total++
-		if task.Completed {
-			completed++
-		}
-	}
-	return // returns total and completed
+	return os.WriteFile(fileName, data, 0644)
 }
