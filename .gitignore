@@ -1,0 +1,6 @@
+# ignore vscode related files
+.vscode
+
+# ignore go related files
+.idea
+
